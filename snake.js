@@ -17,13 +17,27 @@
     var MARGIN = 80;         // start turning back this far from the edge
     var IDLE_MS = 4000;      // go back to wandering after the mouse sits still this long
 
-    var mouse = { x: 0, y: 0, lastMove: -Infinity };
+    var mouse = { x: 0, y: 0, seen: false, lastMove: -Infinity };
     window.addEventListener("pointermove", function (e) {
         mouse.x = e.clientX;
         mouse.y = e.clientY;
+        mouse.seen = true;
         mouse.lastMove = performance.now();
     });
     document.addEventListener("pointerleave", function () { mouse.lastMove = -Infinity; });
+
+    // Scrolling carries the snake along with the page, then it chases the cursor back.
+    var lastScrollY = window.scrollY;
+    window.addEventListener("scroll", function () {
+        var dy = window.scrollY - lastScrollY;
+        lastScrollY = window.scrollY;
+        // Don't let it get carried more than a little way off screen.
+        var headY = body[0].y - dy;
+        if (headY < -150) dy = body[0].y + 150;
+        if (headY > height + 150) dy = body[0].y - height - 150;
+        body.forEach(function (seg) { seg.y -= dy; });
+        if (mouse.seen) mouse.lastMove = performance.now();
+    }, { passive: true });
 
     var width, height;
     function resize() {
