@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Joel Flores - PhD student working on reverse engineering and the PyLingual Python decompiler.">
+    <link rel="stylesheet" href="portfolio.css">
+    <title>Joel Flores</title>
+</head>
+
+<body>
+    <nav class="topnav">
+        <div class="container">
+            <a class="brand" href="#home">JF</a>
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#guitar">Guitar</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header id="home">
+            <h1>Joel's Portfolio</h1>
+            <p class="tagline">PhD student &middot; reverse engineer &middot; CTF player &middot; guitarist</p>
+        </header>
+
+        <main>
+            <section id="about">
+                <h2>About</h2>
+                <div class="about-grid">
+                    <p>
+                        I am Joel Flores, a PhD student under Dr. Jee. I primarily work in reverse engineering, and
+                        mostly on our in-house Python decompiler, <a href="https://pylingual.io/">PyLingual</a>.
+                        I am also the Former CTF (Capture the Flag) chair for the CSG (Computer Security Group). We compete
+                        bi-weekly with 15+ members, and are currently 18th in the US on
+                        <a href="https://ctftime.org/team/333">CTFtime</a>.
+                    </p>
+                    <figure id="csg-logo">
+                        <img src="https://csg.utdallas.edu/content/images/2024/03/ghost-brand.png" alt="CSG logo">
+                        <figcaption>Computer Security Group</figcaption>
+                    </figure>
+                </div>
+                <div class="links">
+                    <a class="button" href="https://ctftime.org/team/333">Our CTF team on CTFtime</a>
+                </div>
+            </section>
+
+            <section id="projects">
+                <h2>Projects</h2>
+
+                <article id="pylingual" class="project">
+                    <figure>
+                        <img src="pylingual_snake.png" alt="PyLingual snake logo">
+                    </figure>
+                    <div class="project-body">
+                        <h3>PyLingual</h3>
+                        <p>
+                            A Python decompiler for Python 3.6+. Useful if you have <code>.pyc</code> files that you
+                            want to reverse engineer. If you can't run it locally, use the web version.
+                        </p>
+                        <ul>
+                            <li>🐍 Python decompilation</li>
+                            <li>🌎 Open source software</li>
+                            <li>🕸️ On the web</li>
+                        </ul>
+                        <div class="links">
+                            <a class="button" href="https://pylingual.io/">Try it at pylingual.io</a>
+                            <a class="button" href="https://github.com/syssec-utd/pylingual">
+                                GitHub <span class="stars">★ <span id="pylingual-stars">1.4k</span></span>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+            </section>
+
+            <section id="guitar">
+                <h2>Guitar</h2>
+                <p>
+                    When I'm not staring at bytecode, I like to play guitar 🎸. I post some of it on my
+                    YouTube channel.
+                </p>
+                <div class="videos">
+                    <div class="video">
+                        <iframe src="https://www.youtube-nocookie.com/embed/khddZ1LY160" title="Guitar video" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <div class="video short">
+                        <iframe src="https://www.youtube-nocookie.com/embed/4wK2CjuvjFI" title="Guitar short" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="links">
+                    <a class="button" href="https://www.youtube.com/@humanslop10">YouTube: @humanslop10</a>
+                </div>
+            </section>
+
+            <section id="contact">
+                <h2>Contact</h2>
+                <p>The best way to reach me:</p>
+                <div class="links">
+                    <a class="button" href="https://github.com/Joel-Flores123">GitHub</a>
+                    <a class="button" href="https://www.youtube.com/@humanslop10">YouTube</a>
+                    <!-- Uncomment and add your email to show an email button:
+                    <a class="button" href="mailto:you@example.com">Email</a>
+                    -->
+                </div>
+            </section>
+        </main>
+
+        <aside id="passion">
+            <p>Web dev is my passion, it calls to me.</p>
+            <a class="button" href="html_awesome.html">See something HTML AWESOME</a>
+        </aside>
+
+        <footer>
+            <p>&copy; <span id="year">2026</span> Joel Flores. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="snake.js"></script>
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+
+        // Live star count for PyLingual; keeps the fallback text if the API is unreachable or rate-limited.
+        fetch("https://api.github.com/repos/syssec-utd/pylingual")
+            .then(function (res) { return res.ok ? res.json() : Promise.reject(res.status); })
+            .then(function (repo) {
+                var n = repo.stargazers_count;
+                document.getElementById("pylingual-stars").textContent =
+                    n >= 1000 ? (n / 1000).toFixed(1).replace(/\.0$/, "") + "k" : n;
+            })
+            .catch(function () {});
+    </script>
+</body>
+</html>
