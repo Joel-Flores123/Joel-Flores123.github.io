@@ -188,6 +188,38 @@ figcaption {
     display: block;
 }
 
+/* art gallery: widths follow each painting's aspect ratio so they share one height */
+.gallery {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    max-width: 720px;  /* keeps the paintings ~230px tall on desktop */
+    margin: 0 auto;
+}
+
+.gallery figure {
+    flex: var(--ratio) 1 0;
+    margin: 0;
+    text-align: center;
+}
+
+.gallery img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 0 4px 16px rgba(94, 43, 126, 0.15);
+    transition: transform 0.15s;
+}
+
+.gallery a:hover img {
+    transform: scale(1.02);
+}
+
+.gallery figcaption {
+    margin-top: 8px;
+}
+
 .links {
     display: flex;
     flex-wrap: wrap;
@@ -259,8 +291,18 @@ footer {
     }
 
     .about-grid,
-    .project {
+    .project,
+    .gallery {
         flex-direction: column;
+    }
+
+    .gallery {
+        align-items: center;
+    }
+
+    .gallery figure {
+        flex: none;
+        width: min(100%, 260px);
     }
 
     #passion {
